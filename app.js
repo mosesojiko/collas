@@ -2,7 +2,6 @@ const express = require('express');
 const userRoute = require('./routes/User')
 const productRouter = require('./routes/Product')
 const app = express();
-const verifyToken  = require('./middlewares/verifyToken')
 const dotenv = require('dotenv')
 dotenv.config();
 const mongoose = require('mongoose');
@@ -14,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 //connect to db
-mongoose.connect(process.env.CONNECT_TO_DB,{ useNewUrlParser: true, useUnifiedTopology: true },()=>{
+mongoose.connect(process.env.CONNECT_TO_DB,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },()=>{
     console.log('connected to db')
 })
 
