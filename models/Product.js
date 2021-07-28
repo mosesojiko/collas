@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 
 const productSchema = new mongoose.Schema({
+   
     name: {
         type: String,
         required: true,
@@ -26,9 +27,14 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    user: {
-        type: mongoose.Types.ObjectId,
+    user: { type: mongoose.Types.ObjectId },
+    date: {
+        type: Date,
+        default: Date.now
     },
+    
+    
+    
 })
 
 module.exports = mongoose.model('Products', productSchema,)

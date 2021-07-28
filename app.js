@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 //connect to db
-mongoose.connect(process.env.CONNECT_TO_DB,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },()=>{
+mongoose.connect(`${process.env.CONNECT_TO_DB}`,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },()=>{
     console.log('connected to db')
 })
 

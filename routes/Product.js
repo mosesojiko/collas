@@ -1,7 +1,16 @@
 const express = require('express');
-const { createProduct } = require('../controllers/Product')
+const { createProduct, getSingleProduct, getAllProducts} = require('../controllers/Product');
+const verifyToken = require('../middlewares/verifyToken')
 const router = express.Router();
 
-router.post('/', createProduct)
+//Create a product
+router.post('/', verifyToken, createProduct)
+
+//get specific product by a user
+router.get('/:id',verifyToken, getSingleProduct)
+
+//get all products 
+router.get('/all',verifyToken, getAllProducts)
+
 
 module.exports = router;

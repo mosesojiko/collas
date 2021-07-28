@@ -2,6 +2,7 @@ let User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const { createUserValidation, loginValidation } = require('../middlewares/validateUser')
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose')
 
 
 
@@ -22,6 +23,7 @@ const createUser = async (req, res) =>{
     const hashPassword = await bcrypt.hash(req.body.password, 10)
     //create a user based on user schema
     let user = new User({
+        _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         email: req.body.email,
         password: hashPassword
