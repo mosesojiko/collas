@@ -34,17 +34,10 @@ const createUser = async (req, res) =>{
     try {
         const saveUser = await user.save();
         
-        //create and assign a token using jwt
-    const token = jwt.sign({_id: user._id}, process.env.USER_SECRET_TOKEN)
-    // res.header('login-token', token).send(token)
-    //   let header = ('login-token', token)
-
         res.json({
             status: 200,
             success: true,
-            header: 'login-token',
             saveUser,
-            token
         })
         console.log(saveUser)
         
@@ -77,7 +70,14 @@ const loginUser = async (req, res) =>{
     if(!validPassword){
         return res.status(400).send("Invalid Password");
     }
-    res.send("You are logged in")
+
+     //create and assign a token using jwt
+     const token = jwt.sign({_id: user._id}, process.env.USER_SECRET_TOKEN)
+
+    return res.json({
+        msg: "You are logged In",
+        token
+    })
 }
 
 //get all users

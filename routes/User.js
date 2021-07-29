@@ -7,7 +7,7 @@ const router = express();
 router.post('/signup', createUser);
 
 //route to login a user
-router.post('/login', verifyToken, loginUser);
+router.post('/login', loginUser);
 
 //route to get all users
 router.get('/', getUsers)
