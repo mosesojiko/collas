@@ -16,7 +16,7 @@ router.get('/all',verifyToken, getAllProducts)
 router.put('/update/:id', verifyToken, updateProduct);
 
 //delete a product
-router.put('/delete/:id', verifyToken, deleteProduct);
+router.delete('/delete/:id', verifyToken, deleteProduct);
 
 
 module.exports = router;
