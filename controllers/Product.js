@@ -19,7 +19,7 @@ const createProduct = async (req, res) =>{
         category: req.body.category,
         price: req.body.price,
         numberInStock: req.body.numberInStock,
-        image: req.file.filename,
+        image: `http://localhost:5000/products/image/${req.file.filename}`,
         url: req.body.url,
         user: req.user._id
         
