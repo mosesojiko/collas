@@ -27,6 +27,9 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    image: {
+        type: String
+    },
     user: { type: mongoose.Types.ObjectId },
     date: {
         type: Date,

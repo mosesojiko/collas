@@ -6,11 +6,13 @@ const dotenv = require('dotenv')
 dotenv.config();
 const mongoose = require('mongoose');
 
+
 const PORT = process.env.PORT;
 
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(express.static('upload/images'))
 
 //connect to db
 mongoose.connect(`${process.env.CONNECT_TO_DB}`,{ useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },()=>{

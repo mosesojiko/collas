@@ -2,11 +2,12 @@
 const Products = require('../models/Product');
 
 
+
 //create a product
 const createProduct = async (req, res) =>{
 
     //check if there is a product with numberInStock 
-    const checkNumberInStock = await User.findOne({numberInStock: req.body.numberInStock})
+    const checkNumberInStock = await Products.findOne({numberInStock: req.body.numberInStock})
     if(checkNumberInStock){
         return res.status(400).send("NumberInStock already exist.")
     }
@@ -18,6 +19,7 @@ const createProduct = async (req, res) =>{
         category: req.body.category,
         price: req.body.price,
         numberInStock: req.body.numberInStock,
+        image: req.file.filename,
         url: req.body.url,
         user: req.user._id
         
@@ -55,15 +57,12 @@ const getSingleProduct = async (req, res) =>{
 //get all products by a user
 const getAllProducts = async (req, res) =>{
     try {
-      let allUserProducts =  await Products.find({user: req.user._id})
-      res.json({
-          message: "List of your product.",
-          allUserProducts
-       
-    })
+     let allUserProducts =  await Products.find({user: req.user._id});
+      return res.json(allUserProducts)
 
     } catch (error) {
-        res.send(error)
+        console.log(error)
+       return res.send(error)
     }
 
 }
@@ -92,7 +91,7 @@ const productToDelete =  await Product.findOneAndDelete({user: req.user._id, _id
 if (!productToDelete) return res.status(400).json({ success: false , msg: `product not found`})
 res.status(200).json({
     success: true , 
-    msg: "Product was deleted successfully." 
+    result: "Product was deleted successfully." 
 })
 } catch (error) {
     res.status(400).json({
